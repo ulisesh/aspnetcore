@@ -108,6 +108,7 @@
     <MicrosoftExtensionsPrimitivesVersion>6.0.0-rc.2.21424.25</MicrosoftExtensionsPrimitivesVersion>
     <MicrosoftWin32SystemEventsVersion>6.0.0-rc.2.21424.25</MicrosoftWin32SystemEventsVersion>
     <MicrosoftInternalRuntimeAspNetCoreTransportVersion>6.0.0-rc.2.21424.25</MicrosoftInternalRuntimeAspNetCoreTransportVersion>
+    <MicrosoftCodeAnalysisCSharpCodeFixTestingXUnitVersion>1.1.1-beta1.21413.1</MicrosoftCodeAnalysisCSharpCodeFixTestingXUnitVersion>
     <SystemDiagnosticsDiagnosticSourceVersion>6.0.0-rc.2.21424.25</SystemDiagnosticsDiagnosticSourceVersion>
     <SystemDiagnosticsEventLogVersion>6.0.0-rc.2.21424.25</SystemDiagnosticsEventLogVersion>
     <SystemDirectoryServicesProtocolsVersion>6.0.0-rc.2.21424.25</SystemDirectoryServicesProtocolsVersion>

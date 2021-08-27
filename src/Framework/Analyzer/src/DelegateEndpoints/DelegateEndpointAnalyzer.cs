@@ -16,6 +16,7 @@ public partial class DelegateEndpointAnalyzer : DiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(new[]
     {
         DiagnosticDescriptors.DoNotUseModelBindingAttributesOnDelegateEndpointParameters,
+        DiagnosticDescriptors.DetectMismatchedParameterOptionality
     });
 
     public override void Initialize(AnalysisContext context)
@@ -50,11 +51,13 @@ public partial class DelegateEndpointAnalyzer : DiagnosticAnalyzer
                 {
                     var lambda = ((IAnonymousFunctionOperation)delegateCreation.Target);
                     DisallowMvcBindArgumentsOnParameters(in operationAnalysisContext, wellKnownTypes, invocation, lambda.Symbol);
+                    DetectMismatchedParameterOptionality(in operationAnalysisContext, invocation, lambda.Symbol);
                 }
                 else if (delegateCreation.Target.Kind == OperationKind.MethodReference)
                 {
                     var methodReference = (IMethodReferenceOperation)delegateCreation.Target;
                     DisallowMvcBindArgumentsOnParameters(in operationAnalysisContext, wellKnownTypes, invocation, methodReference.Method);
+                    DetectMismatchedParameterOptionality(in operationAnalysisContext, invocation, methodReference.Method);
                 }
             }, OperationKind.Invocation);
         });
