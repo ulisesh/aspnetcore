@@ -21,7 +21,6 @@ namespace Microsoft.AspNetCore.Http
     /// </summary>
     public static partial class RequestDelegateFactory
     {
-        private static readonly NullabilityInfoContext NullabilityContext = new();
         private static readonly TryParseMethodCache TryParseMethodCache = new();
 
         private static readonly MethodInfo ExecuteTaskOfTMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteTask), BindingFlags.NonPublic | BindingFlags.Static)!;
@@ -669,7 +668,8 @@ namespace Microsoft.AspNetCore.Http
                 }
 
                 // Allow nullable parameters that don't have a default value
-                var nullability = NullabilityContext.Create(parameter);
+                var nullabilityContext = new NullabilityInfoContext();
+                var nullability = nullabilityContext.Create(parameter);
                 if (nullability.ReadState != NullabilityState.NotNull && !parameter.HasDefaultValue)
                 {
                     return valueExpression;
@@ -815,7 +815,8 @@ namespace Microsoft.AspNetCore.Http
         private static Expression BindParameterFromBindAsync(ParameterInfo parameter, FactoryContext factoryContext)
         {
             // We reference the boundValues array by parameter index here
-            var nullability = NullabilityContext.Create(parameter);
+            var nullabilityContext = new NullabilityInfoContext();
+            var nullability = nullabilityContext.Create(parameter);
             var isOptional = IsOptionalParameter(parameter);
 
             // Get the BindAsync method for the type.
@@ -921,7 +922,8 @@ namespace Microsoft.AspNetCore.Http
             // nullability context are required.
             // - Reference type parameters without a default value in an oblivious
             // nullability context are optional.
-            var nullability = NullabilityContext.Create(parameter);
+            var nullabilityContext = new NullabilityInfoContext();
+            var nullability = nullabilityContext.Create(parameter);
             return parameter.HasDefaultValue
                 || nullability.ReadState != NullabilityState.NotNull;
         }
