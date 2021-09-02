@@ -42,4 +42,8 @@
     <Compile Include="$(SharedSourceRoot)HashCodeCombiner\*.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\Shared\Polyfills\*.cs" />
+  </ItemGroup>
+
 </Project>
